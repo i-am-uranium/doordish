@@ -11,8 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^0.1.3
+  universal_html: ^1.2.2
+  flutter_icons: ^1.1.0
+  logger: ^0.8.3
 
 dev_dependencies:
   flutter_test:
@@ -22,3 +23,9 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/navigation_rail_bg.png
+    - assets/icons/calendar.png
+    - assets/icons/faq.png
+    - assets/icons/menu.png
+    - assets/icons/overview.png
+    - assets/icons/testimonial.png
+    - assets/icons/transaction.png
