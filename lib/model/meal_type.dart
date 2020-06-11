@@ -1,0 +1,17 @@
+enum MealType {
+  breakfast,
+  brunch,
+  elevenses,
+  tea,
+  supper,
+  beforeTraining,
+  afterTraining,
+  firstMeal,
+  lunch,
+  dinner,
+  eveningSnack,
+  diet,
+  slimWaist,
+  keto,
+  protein,
+}

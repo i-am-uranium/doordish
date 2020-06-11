@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'constants/app_theme.dart';
 import 'home.dart';
 
 void main() {
@@ -11,11 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Doordish',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: AppTheme.theme,
       home: const Home(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

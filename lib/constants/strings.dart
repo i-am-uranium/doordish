@@ -6,4 +6,16 @@ class Strings {
   static const String transaction = 'Transaction';
   static const String testimonials = 'Testimonials';
   static const String menu = 'Menu';
+  static const String edit = 'Edit';
+  static const String myOrder = 'My Order';
+  static const String total = 'Total';
+  static const String rupeeSymbol = '₹';
+  static const String checkout = 'Checkout';
+  static const String visa = 'Visa';
+  static const String filter = 'Filter';
+  static const String search = 'Search';
+  static const String myFilters = 'My Filters';
+  static const String popularFilters = 'Popular Filters';
+  static const String loadMore = 'Load more';
+  static const String dragAndDrop = 'Drag & Drop';
 }

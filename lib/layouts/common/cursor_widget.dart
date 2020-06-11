@@ -1,20 +1,30 @@
+import 'dart:html' as html;
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:universal_html/html.dart' as html;
 
-enum CursorType { text, pointer, none }
+enum CursorType { text, pointer, grab, none }
 
-class HandCursor extends MouseRegion {
-  HandCursor({
+class CursorWidget extends MouseRegion {
+  CursorWidget({
     @required Widget child,
+    Function(PointerHoverEvent) onHover,
+    Function(PointerExitEvent) onExit,
     CursorType cursorType = CursorType.pointer,
   }) : super(
           onHover: (evt) {
+            if (onHover != null) {
+              onHover(evt);
+            }
             switch (cursorType) {
               case CursorType.text:
                 _appContainer.style.cursor = 'text';
                 break;
               case CursorType.pointer:
                 _appContainer.style.cursor = 'pointer';
+                break;
+              case CursorType.grab:
+                _appContainer.style.cursor = 'grab';
                 break;
               case CursorType.none:
                 _appContainer.style.cursor = 'default';
@@ -25,6 +35,9 @@ class HandCursor extends MouseRegion {
             }
           },
           onExit: (evt) {
+            if (onExit != null) {
+              onExit(evt);
+            }
             _appContainer.style.cursor = 'default';
           },
           child: child,
