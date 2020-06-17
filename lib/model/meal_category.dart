@@ -1,4 +1,4 @@
-enum MealType {
+enum MealCategory {
   breakfast,
   brunch,
   elevenses,
@@ -14,4 +14,5 @@ enum MealType {
   slimWaist,
   keto,
   protein,
+  all,
 }

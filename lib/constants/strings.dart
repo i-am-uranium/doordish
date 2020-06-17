@@ -18,4 +18,9 @@ class Strings {
   static const String popularFilters = 'Popular Filters';
   static const String loadMore = 'Load more';
   static const String dragAndDrop = 'Drag & Drop';
+  static const String mealsFound = 'Meals found';
+  static const String sortedBy = 'Sorted by';
+  static const String changeAddress = 'Change Address';
+  static const String zipcode = 'Zip Code';
+  static const String chooseYourAddress = 'CHOOSE YOUR ADDRESS';
 }

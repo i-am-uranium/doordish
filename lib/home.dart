@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'constants/app_colors.dart';
+
 import 'layouts/checkout/checkout.dart';
 import 'layouts/menu/meal_menu.dart';
 import 'layouts/navigation/main_navigation_rail.dart';
+import 'layouts/order/edit_order_delivery_detail.dart';
 import 'layouts/overview/overview.dart';
+import 'model/address.dart';
 import 'model/navigation_destination.dart';
 
 class Home extends StatefulWidget {
@@ -15,6 +18,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final double _navigationPlusSpaceHeight = 60;
   final double _navigationOverlayWidth = 44;
 
@@ -49,6 +53,9 @@ class _HomeState extends State<Home> {
     _addNRTopCurve();
     _addNRBottomCurve();
     return Scaffold(
+      key: _scaffoldKey,
+      drawerScrimColor: Colors.transparent,
+      endDrawer: const EditOrderDeliveryDetail(),
       body: Row(
         children: [
           Container(
@@ -59,6 +66,7 @@ class _HomeState extends State<Home> {
               destinations: destinations,
               onDestinationSelect: _updateNavigationDestination,
               currentIndex: currentDestinationIndex,
+              width: _navigationRailWidth - 32,
             ),
           ),
           _currentDestination(currentDestinationIndex),
@@ -190,6 +198,11 @@ class _HomeState extends State<Home> {
               ),
               child: Checkout(
                 dragTargetHeight: _mealItemDropTargetHeight,
+                onEditDeliveryDetailsClick: () {
+                  _scaffoldKey.currentState.openEndDrawer();
+                },
+                address: Address.addresses
+                    .firstWhere((element) => element.isDefault),
               ),
             )
           ],

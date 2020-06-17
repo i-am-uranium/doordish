@@ -42,9 +42,9 @@ class _CheckoutHeaderState extends State<CheckoutHeader> {
                 getCurrentPosition(
                   allowInterop(
                     (pos) {
-                      logger.i('pos is ${pos}');
-                      LocationAPI().fetchData().then(
-                          (value) => setState(() => currentLocation = value));
+                      logger.i('pos is $pos');
+                      LocationAPI().fetchData().then((value) =>
+                          setState(() => currentLocation = value.city));
                     },
                   ),
                 );
@@ -83,7 +83,7 @@ class _CheckoutHeaderState extends State<CheckoutHeader> {
                 height: 48,
                 padding: const EdgeInsets.all(4),
                 child: Image.asset(
-                  Assets.profilePng,
+                  Assets.femaleAvatar,
                   width: 40,
                   height: 40,
                 ),

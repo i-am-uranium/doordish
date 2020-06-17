@@ -1,3 +1,4 @@
+import 'package:doordish/constants/assets.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/app_colors.dart';
@@ -8,39 +9,59 @@ import '../common/vertical_spacer.dart';
 
 class MainNavigationRail extends StatelessWidget {
   const MainNavigationRail({
+    @required this.width,
     @required this.destinations,
     @required this.currentIndex,
     this.onDestinationSelect,
     Key key,
   }) : super(key: key);
 
+  final double width;
   final List<NavigationDestination> destinations;
   final ValueChanged<int> onDestinationSelect;
   final int currentIndex;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.only(
-        top: 114,
-        left: 32,
-      ),
-      itemCount: destinations.length,
-      itemBuilder: (context, index) {
-        destinations[currentIndex].selected = true;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            DestinationItem(
-              destination: destinations[index],
-              onSelect: () => onDestinationSelect(index),
+    return Stack(
+      children: [
+        Positioned(
+          top: 32,
+          left: 54,
+          child: Image.asset(
+            Assets.logo,
+            width: 48,
+            height: 48,
+            color: AppColors.white,
+          ),
+        ),
+        Positioned(
+          top: 114,
+          left: 32,
+          child: SizedBox(
+            width: width,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: destinations.length,
+              itemBuilder: (context, index) {
+                destinations[currentIndex].selected = true;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DestinationItem(
+                      destination: destinations[index],
+                      onSelect: () => onDestinationSelect(index),
+                    ),
+                    const VerticalSpacer(
+                      space: 16,
+                    ),
+                  ],
+                );
+              },
             ),
-            const VerticalSpacer(
-              space: 16,
-            ),
-          ],
-        );
-      },
+          ),
+        ),
+      ],
     );
   }
 }

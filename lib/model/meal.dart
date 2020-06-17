@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import '../constants/assets.dart';
+import 'meal_category.dart';
 import 'meal_quantity.dart';
 
 class Meal extends Equatable {
@@ -16,11 +17,35 @@ class Meal extends Equatable {
     this.liked,
     this.discount,
     this.discountType,
+    this.categories,
   });
 
   final int id;
   final double discount;
   final String discountType;
+  final String name;
+  final String description;
+  final double rating;
+  final String imageUrl;
+  final int price;
+  final MealQuantity quantity;
+  final String backgroundColorHex;
+  final List<MealCategory> categories;
+  bool liked;
+
+  @override
+  List<Object> get props => [
+        name,
+        description,
+        rating,
+        imageUrl,
+        price,
+        quantity,
+        backgroundColorHex,
+        liked,
+        mealQuantityUnit,
+        categories,
+      ];
 
   String get mealQuantityUnit {
     switch (quantity.type) {
@@ -40,28 +65,6 @@ class Meal extends Equatable {
     return '';
   }
 
-  final String name;
-  final String description;
-  final double rating;
-  final String imageUrl;
-  final int price;
-  final MealQuantity quantity;
-  final String backgroundColorHex;
-  bool liked;
-
-  @override
-  List<Object> get props => [
-        name,
-        description,
-        rating,
-        imageUrl,
-        price,
-        quantity,
-        backgroundColorHex,
-        liked,
-        mealQuantityUnit,
-      ];
-
   static List<Meal> get list {
     return [
       Meal(
@@ -77,6 +80,12 @@ class Meal extends Equatable {
           type: MealQuantityType.gm,
         ),
         backgroundColorHex: 'FFE9F8',
+        categories: const [
+          MealCategory.lunch,
+          MealCategory.dinner,
+          MealCategory.diet,
+          MealCategory.afterTraining,
+        ],
       ),
       Meal(
         id: 2,
@@ -91,6 +100,12 @@ class Meal extends Equatable {
           type: MealQuantityType.gm,
         ),
         backgroundColorHex: 'FFF3E9',
+        categories: const [
+          MealCategory.lunch,
+          MealCategory.dinner,
+          MealCategory.diet,
+          MealCategory.afterTraining,
+        ],
       ),
       Meal(
         id: 3,
@@ -105,6 +120,12 @@ class Meal extends Equatable {
           type: MealQuantityType.gm,
         ),
         backgroundColorHex: 'E9FFFF',
+        categories: const [
+          MealCategory.lunch,
+          MealCategory.dinner,
+          MealCategory.diet,
+          MealCategory.afterTraining,
+        ],
       ),
       Meal(
         id: 4,
@@ -119,6 +140,10 @@ class Meal extends Equatable {
           type: MealQuantityType.gm,
         ),
         backgroundColorHex: 'E9F7FF',
+        categories: const [
+          MealCategory.lunch,
+          MealCategory.diet,
+        ],
       ),
       Meal(
         id: 5,
@@ -133,6 +158,10 @@ class Meal extends Equatable {
           type: MealQuantityType.gm,
         ),
         backgroundColorHex: 'F6FFE9',
+        categories: const [
+          MealCategory.lunch,
+          MealCategory.diet,
+        ],
       ),
       Meal(
         id: 6,
@@ -147,6 +176,10 @@ class Meal extends Equatable {
           type: MealQuantityType.gm,
         ),
         backgroundColorHex: 'ECF0FF',
+        categories: const [
+          MealCategory.lunch,
+          MealCategory.diet,
+        ],
       ),
       Meal(
         id: 7,
@@ -161,6 +194,9 @@ class Meal extends Equatable {
           type: MealQuantityType.gm,
         ),
         backgroundColorHex: 'FFE9E9',
+        categories: const [
+          MealCategory.eveningSnack,
+        ],
       ),
       Meal(
         id: 8,
@@ -175,6 +211,9 @@ class Meal extends Equatable {
           type: MealQuantityType.gm,
         ),
         backgroundColorHex: 'FFFEE9',
+        categories: const [
+          MealCategory.afterTraining,
+        ],
       ),
       Meal(
         id: 9,
@@ -189,6 +228,9 @@ class Meal extends Equatable {
           type: MealQuantityType.gm,
         ),
         backgroundColorHex: 'FFE9F6',
+        categories: const [
+          MealCategory.breakfast,
+        ],
       ),
     ];
   }

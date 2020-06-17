@@ -1,8 +1,8 @@
-import 'package:doordish/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 import '../../constants/app_colors.dart';
+import '../../constants/strings.dart';
 import '../../utils/logger.dart';
 
 class LoadMoreButton extends StatelessWidget {

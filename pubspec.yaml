@@ -16,6 +16,7 @@ dependencies:
   equatable: ^1.0.0
   js: ^0.6.0
   http: ^0.12.0+4
+  flutter_google_maps: ^3.7.1
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +48,8 @@ flutter:
     - assets/icons/french_fries.png
     - assets/icons/sushi_rool.png
     - assets/icons/kiwi.png
+    - assets/icons/logo.png
+    - assets/icons/female_avatar.png
 
     - assets/images/meals/bean_soup.png
     - assets/images/meals/cabbage_salad.png
@@ -58,6 +61,10 @@ flutter:
     - assets/images/meals/okroshka.png
     - assets/images/meals/roast_potatoes.png
     - assets/images/bg.png
+    - assets/images/home_illustration.png
+    - assets/images/time_illustration.png
+    - assets/images/video.png
+    - assets/images/client_logo.png
 
 fonts:
   - family: Helvetica

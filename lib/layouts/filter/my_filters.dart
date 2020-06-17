@@ -1,47 +1,24 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/app_colors.dart';
-import '../../constants/assets.dart';
 import '../../constants/strings.dart';
-import '../../model/food_categories.dart';
-import '../../model/meal_filter.dart';
+import '../../model/meal_filter_categories.dart';
 import '../common/horizontal_spacer.dart';
 
-class MealFilters extends StatefulWidget {
-  const MealFilters({
-    this.filters,
+class MyFilters extends StatelessWidget {
+  MyFilters({
+    @required this.onPopularCategorySelect,
+    @required this.onRemoveCategoryClick,
+    this.categories,
     Key key,
   }) : super(key: key);
-  final MealFilter filters;
 
-  @override
-  _MealFiltersState createState() => _MealFiltersState();
-}
+  final List<MealFilterCategory> categories;
+  final ValueChanged<MealFilterCategory> onPopularCategorySelect;
+  final ValueChanged<MealFilterCategory> onRemoveCategoryClick;
 
-class _MealFiltersState extends State<MealFilters> {
-  MealFilter _filters;
-  final List<FoodCategories> _popularFilters = [
-    FoodCategories(
-      name: 'Burgers',
-      selected: false,
-      icon: Assets.burger,
-    ),
-    FoodCategories(
-      name: 'Pizza',
-      selected: false,
-      icon: Assets.burger,
-    )
-  ];
-  @override
-  void didUpdateWidget(MealFilters oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (_filters != null && widget.filters != null) {
-      widget.filters.categories.addAll(_filters.categories);
-    }
-    if (widget.filters != null) {
-      _filters = widget.filters;
-    }
-  }
+  final List<MealFilterCategory> _popularFilters =
+      MealFilterCategory.popularFilters;
 
   @override
   Widget build(BuildContext context) {
@@ -60,20 +37,17 @@ class _MealFiltersState extends State<MealFilters> {
                 ),
               ),
               const HorizontalSpacer(),
-              if (_filters != null)
+              if (categories != null)
                 SizedBox(
                   width: 285,
                   child: ListView.builder(
                     reverse: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: _filters.categories.length,
-                    itemBuilder: (context, index) =>
-                        _filterChip(_filters.categories[index], () {
-                      setState(() {
-                        _filters.categories[index].selected =
-                            !_filters.categories[index].selected;
-                      });
-                    }),
+                    itemCount: categories.length,
+                    itemBuilder: (context, index) => _filterChip(
+                      categories[index],
+                      onSelect: () => onRemoveCategoryClick(categories[index]),
+                    ),
                   ),
                 )
               else
@@ -96,31 +70,20 @@ class _MealFiltersState extends State<MealFilters> {
             letterSpacing: 1,
           ),
         ),
-        _filterChip(_popularFilters[0], () {
-          _filters ??= MealFilter();
-          _filters.categories ??= [];
-          setState(() {
-            if (!_popularFilters[0].selected) {
-              _popularFilters[0].selected = true;
-              _filters.categories.add(_popularFilters[0]);
-            }
-          });
-        }),
-        _filterChip(_popularFilters[1], () {
-          _filters ??= MealFilter();
-          _filters.categories ??= [];
-          setState(() {
-            if (!_popularFilters[1].selected) {
-              _popularFilters[1].selected = true;
-              _filters.categories.add(_popularFilters[1]);
-            }
-          });
-        }),
+        Row(
+          children: _popularFilters
+              .map(
+                (e) => _filterChip(e, onSelect: () {
+                  onPopularCategorySelect(e);
+                }),
+              )
+              .toList(),
+        )
       ],
     );
   }
 
-  Widget _filterChip(FoodCategories foodCategories, Function onSelect) {
+  Widget _filterChip(MealFilterCategory foodCategories, {Function onSelect}) {
     return Row(
       children: [
         FilterChip(

@@ -22,6 +22,10 @@ class AppTheme {
         labelStyle: TextStyle(
           color: AppColors.primaryColor,
         ),
+        hintStyle: TextStyle(
+          color: AppColors.secondaryText,
+          fontSize: 12,
+        ),
       ),
       errorColor: AppColors.error,
       cursorColor: AppColors.primaryColor,

@@ -1,9 +1,9 @@
-import 'package:doordish/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 import '../../constants/app_colors.dart';
+import '../../constants/assets.dart';
 import '../../model/meal.dart';
 import '../common/cursor_widget.dart';
 import '../common/horizontal_spacer.dart';
@@ -160,14 +160,11 @@ class _MealMenuItemState extends State<MealMenuItem> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                    top: 32,
-                    right: 16,
-                  ),
+                  padding: const EdgeInsets.only(right: 16, top: 4),
                   child: Image.asset(
                     widget.meal.imageUrl,
-                    width: 70,
-                    height: 70,
+                    width: 120,
+                    height: 90,
                   ),
                 ),
                 Padding(

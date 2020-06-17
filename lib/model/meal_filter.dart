@@ -1,5 +1,5 @@
 import 'distance_range.dart';
-import 'food_categories.dart';
+import 'meal_filter_categories.dart';
 
 class MealFilter {
   MealFilter({
@@ -9,8 +9,8 @@ class MealFilter {
     this.maxPrice,
   });
 
-  List<FoodCategories> categories;
+  List<MealFilterCategory> categories;
   DistanceRange distanceRange;
-  int minPrice;
-  int maxPrice;
+  double minPrice;
+  double maxPrice;
 }

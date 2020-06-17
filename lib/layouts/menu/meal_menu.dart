@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import '../../constants/app_colors.dart';
 import '../../model/meal.dart';
 import '../../model/meal_filter.dart';
+import '../../model/meal_filter_categories.dart';
+import '../../model/meal_sorting.dart';
 import '../../utils/logger.dart';
-import '../common/horizontal_spacer.dart';
 import '../common/vertical_spacer.dart';
+import '../filter/my_filters.dart';
+import '../search/search_bar.dart';
 import 'load_more_button.dart';
-import 'meal_filters.dart';
 import 'meal_menu_item.dart';
-import 'search_bar.dart';
+import 'meals_grid_section.dart';
 
 class MealMenuWidget extends StatefulWidget {
   const MealMenuWidget({
@@ -28,39 +29,21 @@ class MealMenuWidget extends StatefulWidget {
   _MealMenuWidgetState createState() => _MealMenuWidgetState();
 }
 
-class _MealMenuWidgetState extends State<MealMenuWidget>
-    with SingleTickerProviderStateMixin {
-  List<Meal> meals = [];
-  MealFilter filters;
+class _MealMenuWidgetState extends State<MealMenuWidget> {
+  List<Meal> _meals = [];
+  MealFilter _filters;
   bool _showLoadMoreButton = false;
-
-  final _scrollController = ScrollController();
-  final _scrollThreshold = 500.0;
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  void _onScroll() {
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.position.pixels;
-    if (maxScroll - currentScroll <= _scrollThreshold) {
-      logger.i('max scroll reached fetch more meals');
-      if (!_showLoadMoreButton) {
-        setState(() {
-          _showLoadMoreButton = true;
-        });
-      }
-    }
-  }
+  final List<MealFilterCategory> _appliedCategories = [];
+  final ScrollController _scrollController = ScrollController();
+  final double _scrollThreshold = 500;
+  MealSorting _mealsSortedBy = MealSorting.popularity;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    meals = Meal.list;
+    _meals = Meal.list;
+    _sortMeals(_mealsSortedBy);
   }
 
   @override
@@ -71,55 +54,43 @@ class _MealMenuWidgetState extends State<MealMenuWidget>
           onSearchTextChange: (value) {
             logger.i('Search text is: $value');
           },
-          onFilterApply: (value) {
-            setState(() => filters = value);
-            logger.i('On filter apply: ${value.minPrice}');
-          },
+          onFilterApply: _applyFilter,
+          initialFilter: _filters,
         ),
         const VerticalSpacer(),
-        MealFilters(filters: filters),
+        MyFilters(
+          categories: _appliedCategories,
+          onPopularCategorySelect: _addPopularCategory,
+          onRemoveCategoryClick: _removeAppliedCategories,
+        ),
         const VerticalSpacer(),
-        Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 8),
-              child: Row(
-                children: [
-                  Text(
-                    '345',
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                  HorizontalSpacer(),
-                  Text(
-                    'Meals found',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppColors.secondaryText,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: MealsGridSection(
+            mealsCount: _meals.length,
+            onMealSortingChange: (sortBy) {
+              _sortMeals(sortBy);
+              setState(() => _mealsSortedBy = sortBy);
+            },
+            sortedBy: _mealsSortedBy,
+          ),
         ),
         const VerticalSpacer(),
         Expanded(
           child: GridView.builder(
             controller: _scrollController,
             shrinkWrap: true,
-            itemCount: meals.length,
+            itemCount: _meals.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 22 / 21,
+              childAspectRatio: 219 / 201,
               crossAxisCount: 3,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
             ),
             itemBuilder: (context, index) => MealMenuItem(
-              meal: meals[index],
+              meal: _meals[index],
               onLikeClick: (liked) =>
-                  setState(() => meals[index].liked = liked),
+                  setState(() => _meals[index].liked = liked),
               onSelect: () {
                 logger.d('Meal selected: $index');
               },
@@ -132,10 +103,113 @@ class _MealMenuWidgetState extends State<MealMenuWidget>
         AnimatedOpacity(
           opacity: _showLoadMoreButton ? 1.0 : 0.0,
           duration: const Duration(milliseconds: 500),
-          child: const LoadMoreButton(),
+          child: Column(
+            children: const [
+              LoadMoreButton(),
+              VerticalSpacer(space: 16),
+            ],
+          ),
         ),
-        const VerticalSpacer(space: 16),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _sortMeals(MealSorting sortBy) {
+    switch (sortBy) {
+      case MealSorting.priceAsc:
+        _meals.sort((curr, next) {
+          return curr.price.compareTo(next.price);
+        });
+        break;
+      case MealSorting.priceDesc:
+        _meals.sort((curr, next) {
+          return next.price.compareTo(curr.price);
+        });
+        break;
+      case MealSorting.rating:
+        _meals.sort((curr, next) {
+          return next.rating.compareTo(curr.rating);
+        });
+        break;
+      case MealSorting.popularity:
+        _meals.shuffle();
+        break;
+    }
+  }
+
+  void _applyFilter(MealFilter appliedFilter) {
+    if (appliedFilter != null && appliedFilter.categories.isNotEmpty) {
+      setState(() {
+        _filters = appliedFilter;
+        _appliedCategories.addAll(
+          appliedFilter.categories.where((element) => element.selected),
+        );
+        _updateMeals(_appliedCategories);
+      });
+    }
+  }
+
+  void _addPopularCategory(MealFilterCategory value) {
+    setState(() {
+      final MealFilterCategory alreadyAddedCategory = _appliedCategories
+          .firstWhere((element) => element == value, orElse: () => null);
+      if (alreadyAddedCategory == null) {
+        _appliedCategories.add(value);
+      }
+      _updateMeals(_appliedCategories);
+    });
+  }
+
+  void _removeAppliedCategories(MealFilterCategory value) {
+    setState(() {
+      _appliedCategories.removeWhere((element) => element == value);
+      if (_filters != null && _filters.categories != null) {
+        final int index = _filters.categories.indexOf(value);
+        if (index > 0) {
+          _filters.categories.elementAt(index).selected =
+              !_filters.categories.elementAt(index).selected;
+        }
+      }
+      _updateMeals(_appliedCategories);
+    });
+  }
+
+  void _updateMeals(List<MealFilterCategory> categories) {
+    if (categories.isEmpty) {
+      _meals = Meal.list;
+      return;
+    }
+    final List<Meal> filteredMeals = [];
+    for (final Meal meal in _meals) {
+      final categoryExist = meal.categories.any((mealCategory) =>
+          categories.any((element) => mealCategory == element.category));
+      if (categoryExist) {
+        filteredMeals.add(meal);
+      }
+    }
+    _meals = filteredMeals;
+  }
+
+  void _onScroll() {
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.position.pixels;
+    if (maxScroll - currentScroll <= _scrollThreshold) {
+      if (!_showLoadMoreButton) {
+        setState(() {
+          _showLoadMoreButton = true;
+        });
+      }
+    }
+    if (maxScroll > currentScroll) {
+      setState(() {
+        _showLoadMoreButton = false;
+      });
+    }
   }
 }

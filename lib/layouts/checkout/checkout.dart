@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants/app_colors.dart';
 import '../../constants/strings.dart';
+import '../../model/address.dart';
 import '../../model/line_item.dart';
 import '../../model/meal.dart';
 import '../../utils/logger.dart';
@@ -13,16 +14,20 @@ import 'header.dart';
 
 class Checkout extends StatefulWidget {
   const Checkout({
+    @required this.address,
     this.onProfileClick,
     this.onNotificationClick,
     this.onMoreClick,
     this.dragTargetHeight = 48,
     Key key,
+    this.onEditDeliveryDetailsClick,
   }) : super(key: key);
   final Function onProfileClick;
   final Function onNotificationClick;
   final Function onMoreClick;
   final double dragTargetHeight;
+  final Function onEditDeliveryDetailsClick;
+  final Address address;
 
   @override
   CheckoutState createState() => CheckoutState();
@@ -50,7 +55,12 @@ class CheckoutState extends State<Checkout> {
               logger.i('on more click');
             },
           ),
-          const OrderDeliveryDetails(),
+          OrderDeliveryDetails(
+            onEditButtonClick: () {
+              widget.onEditDeliveryDetailsClick();
+            },
+            address: widget.address,
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 16, top: 16),
             child: Divider(

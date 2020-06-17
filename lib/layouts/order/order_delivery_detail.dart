@@ -3,11 +3,18 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 import '../../constants/app_colors.dart';
 import '../../constants/strings.dart';
-import '../../utils/logger.dart';
+import '../../model/address.dart';
+import '../common/hand_cursor_inkwell.dart';
 import '../common/horizontal_spacer.dart';
 
 class OrderDeliveryDetails extends StatelessWidget {
-  const OrderDeliveryDetails({Key key}) : super(key: key);
+  const OrderDeliveryDetails({
+    @required this.address,
+    this.onEditButtonClick,
+    Key key,
+  }) : super(key: key);
+  final Function onEditButtonClick;
+  final Address address;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +36,7 @@ class OrderDeliveryDetails extends StatelessWidget {
               ),
               FlatButton(
                 padding: EdgeInsets.zero,
-                onPressed: () {
-                  logger.i('on edit button click');
-                },
+                onPressed: onEditButtonClick,
                 child: const Text(
                   Strings.edit,
                   style: TextStyle(
@@ -51,13 +56,15 @@ class OrderDeliveryDetails extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               color: AppColors.primaryColorLight,
-              child: const SizedBox(
-                width: 40,
-                height: 40,
-                child: Icon(
-                  MaterialCommunityIcons.clock,
-                  color: AppColors.primaryColor,
-                  size: 20,
+              child: const HandCursorInkWell(
+                child: SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: Icon(
+                    MaterialCommunityIcons.clock,
+                    color: AppColors.primaryColor,
+                    size: 20,
+                  ),
                 ),
               ),
             ),
@@ -89,9 +96,9 @@ class OrderDeliveryDetails extends StatelessWidget {
               ),
             ),
             const HorizontalSpacer(),
-            const Text(
-              '69 7th Ave S, New York, NY 10014',
-              style: TextStyle(
+            Text(
+              '${address.street}, ${address.city}, ${address.zipcode}',
+              style: const TextStyle(
                 fontSize: 14,
               ),
             ),

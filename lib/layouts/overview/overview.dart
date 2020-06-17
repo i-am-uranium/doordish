@@ -1,3 +1,6 @@
+import 'package:doordish/constants/app_colors.dart';
+import 'package:doordish/layouts/common/horizontal_spacer.dart';
+import 'package:doordish/layouts/common/vertical_spacer.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/assets.dart';
@@ -22,24 +25,25 @@ class _OverviewState extends State<Overview> {
       width: widget.width,
       height: widget.height,
       decoration: const BoxDecoration(
+        color: AppColors.white,
         image: DecorationImage(
           image: AssetImage(
             Assets.overViewBG,
           ),
-          fit: BoxFit.cover,
+          fit: BoxFit.fitHeight,
         ),
       ),
       child: Stack(
-        children: const [
-          Positioned(
-            top: 200,
-            left: 32,
-            child: Text(
-              'Secret',
-              style: TextStyle(
-                fontSize: 50,
-                letterSpacing: 0.015,
-                color: Color(0xFFC29C51),
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: 24,
+              ),
+              child: Image.asset(
+                Assets.clientLogo,
+                height: 64,
               ),
             ),
           ),

@@ -1,7 +1,5 @@
 class Assets {
   Assets._();
-  static const navigationRailBGPng = 'assets/images/navigation_rail_bg.png';
-  static const dottedRectanglePng = 'assets/images/dotted_rectangle.png';
 
   static const calendarPng = 'assets/icons/calendar.png';
   static const faqPng = 'assets/icons/faq.png';
@@ -16,6 +14,9 @@ class Assets {
   static const profilePng = 'assets/icons/profile.png';
   static const visaLogo = 'assets/icons/visa_logo_transparent.png';
   static const editButton = 'assets/icons/edit_button.png';
+  static const logo = 'assets/icons/logo.png';
+  static const clientLogo = 'assets/images/client_logo.png';
+  static const femaleAvatar = 'assets/icons/female_avatar.png';
 
   static const beanSoup = 'assets/images/meals/bean_soup.png';
   static const cabbageSalad = 'assets/images/meals/cabbage_salad.png';
@@ -27,6 +28,9 @@ class Assets {
   static const okroshka = 'assets/images/meals/okroshka.png';
   static const roastPotatoes = 'assets/images/meals/roast_potatoes.png';
   static const overViewBG = 'assets/images/bg.png';
+  static const homeIllustration = 'assets/images/home_illustration.png';
+  static const timeIllustration = 'assets/images/time_illustration.png';
+  static const video = 'assets/images/video.png';
 
   static const bowl = 'assets/icons/bowl.png';
   static const bread_1 = 'assets/icons/bread_1.png';
