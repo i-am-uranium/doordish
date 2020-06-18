@@ -23,4 +23,12 @@ class Strings {
   static const String changeAddress = 'Change Address';
   static const String zipcode = 'Zip Code';
   static const String chooseYourAddress = 'CHOOSE YOUR ADDRESS';
+  static const String ifYouCant = 'If you don’t  ';
+  static const String lickYour = 'lick your';
+  static const String fingers = 'fingers, ';
+  static const String enjoyYourHalf = 'enjoy only half';
+  static const String overviewDescription =
+      '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placerat cursus id id porttitor hendrerit quisque justo. Vitae cursus vitae, posuere tempus proin arcu volutpat. Tristique dictum ipsum lorem metus, morbi tincidunt. Convallis ultrices eugiat tortor turpis ipsum ultrices eget. Duis ut velit adipiscing sed. A sed enim sit diam et, imperdiet ultrices non.''';
+  static const String overviewDescription2 =
+      '''Convallis ultrices eugiat tortor turpis ipsum ultrices eget. Duis ut velit adipiscing sed. A sed enim sit diam et, imperdiet ultrices non.''';
 }

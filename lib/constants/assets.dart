@@ -17,6 +17,7 @@ class Assets {
   static const logo = 'assets/icons/logo.png';
   static const clientLogo = 'assets/images/client_logo.png';
   static const femaleAvatar = 'assets/icons/female_avatar.png';
+  static const awards = 'assets/icons/award.png';
 
   static const beanSoup = 'assets/images/meals/bean_soup.png';
   static const cabbageSalad = 'assets/images/meals/cabbage_salad.png';
@@ -31,6 +32,9 @@ class Assets {
   static const homeIllustration = 'assets/images/home_illustration.png';
   static const timeIllustration = 'assets/images/time_illustration.png';
   static const video = 'assets/images/video.png';
+
+  static const pumpkinSoup = 'assets/images/pumpkin_soup.png';
+  static const slideVeg = 'assets/images/slide_veg.png';
 
   static const bowl = 'assets/icons/bowl.png';
   static const bread_1 = 'assets/icons/bread_1.png';

@@ -50,6 +50,7 @@ flutter:
     - assets/icons/kiwi.png
     - assets/icons/logo.png
     - assets/icons/female_avatar.png
+    - assets/icons/award.png
 
     - assets/images/meals/bean_soup.png
     - assets/images/meals/cabbage_salad.png
@@ -65,6 +66,8 @@ flutter:
     - assets/images/time_illustration.png
     - assets/images/video.png
     - assets/images/client_logo.png
+    - assets/images/pumpkin_soup.png
+    - assets/images/slide_veg.png
 
 fonts:
   - family: Helvetica
