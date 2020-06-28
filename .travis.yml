@@ -1,6 +1,3 @@
-services:
-  - docker
-
 deploy:
   provider: elasticbeanstalk
   region: "ap-south-1"
