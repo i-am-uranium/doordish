@@ -1,8 +1,10 @@
 import 'package:doordish/constants/assets.dart';
 import 'package:doordish/layouts/common/floating_food_card.dart';
 import 'package:doordish/layouts/common/horizontal_spacer.dart';
+import 'package:doordish/layouts/common/vertical_spacer.dart';
 import 'package:doordish/layouts/menu/meal_menu_item.dart';
 import 'package:doordish/model/meal.dart';
+import 'package:doordish/utils/logger.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/app_colors.dart';
@@ -56,6 +58,61 @@ class Testimonial extends StatelessWidget {
                           color: AppColors.secondaryText,
                         ),
                       ),
+                    ),
+                    VerticalSpacer(
+                      space: 24,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Shahid Zaman',
+                          style: TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                        HorizontalSpacer(),
+                        Container(
+                          width: 1,
+                          height: 20,
+                          color: AppColors.primaryColor,
+                        ),
+                        HorizontalSpacer(),
+                        Text(
+                          'Customer',
+                          style: TextStyle(
+                            color: AppColors.secondaryText,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.arrow_back,
+                            ),
+                            onPressed: () {
+                              logger.i('ON back button pressed');
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.arrow_forward,
+                            ),
+                            onPressed: () {
+                              logger.i('ON back button pressed');
+                            },
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),
