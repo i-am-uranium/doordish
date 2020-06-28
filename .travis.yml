@@ -1,3 +1,4 @@
+language: generic
 deploy:
   provider: elasticbeanstalk
   region: "ap-south-1"
