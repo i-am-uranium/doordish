@@ -1,3 +1,4 @@
+import 'package:doordish/utils/logger.dart';
 import 'package:flutter/material.dart';
 
 import 'constants/app_colors.dart';
@@ -7,6 +8,7 @@ import 'layouts/menu/meal_menu.dart';
 import 'layouts/navigation/main_navigation_rail.dart';
 import 'layouts/order/edit_order_delivery_detail.dart';
 import 'layouts/overview/overview.dart';
+import 'layouts/testimonials/testimonial.dart';
 import 'model/address.dart';
 import 'model/navigation_destination.dart';
 
@@ -206,6 +208,15 @@ class _HomeState extends State<Home> {
               ),
             )
           ],
+        );
+      case 4:
+        return Testimonial(
+          width: MediaQuery.of(context).size.width - _navigationRailWidth,
+          height: MediaQuery.of(context).size.height,
+          onReadMoreClick: (value) {
+            logger.i(
+                'Testimonial:: read more clicked. blog id is: ${value.blogId}');
+          },
         );
       default:
         return Container();
