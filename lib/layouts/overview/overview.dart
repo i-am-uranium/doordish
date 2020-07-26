@@ -1,3 +1,5 @@
+import 'package:doordish/layouts/common/floating_food_card.dart';
+import 'package:doordish/model/meal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -205,73 +207,13 @@ class _OverviewState extends State<Overview> {
           Positioned(
             left: 64,
             top: 364,
-            child: Card(
-              elevation: 4,
-              child: Container(
-                height: 144,
-                width: 320,
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Text(
-                          'Pumpkin Soup',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        const HorizontalSpacer(
-                          space: 16,
-                        ),
-                        Container(
-                          width: 1,
-                          height: 20,
-                          color: AppColors.primaryColor,
-                        ),
-                        const HorizontalSpacer(
-                          space: 16,
-                        ),
-                        const Text(
-                          '${Strings.rupeeSymbol}359',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ],
-                    ),
-                    const VerticalSpacer(
-                      space: 16,
-                    ),
-                    const Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placerat cursus id id porttito',
-                      style: TextStyle(
-                        color: AppColors.secondaryText,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                    const VerticalSpacer(),
-                    HandCursorInkWell(
-                        onClick: () {
-                          logger.i('On order now click');
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Text(
-                              'Order now',
-                              style: TextStyle(
-                                color: AppColors.primaryColor,
-                                fontSize: 13,
-                              ),
-                            ),
-                            HorizontalSpacer(),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 20,
-                            ),
-                          ],
-                        ))
-                  ],
-                ),
+            child: FloatingMealCard(
+              meal: Meal(
+                name: 'Pumpkin Soup',
+                price: 359,
+                description:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                imageUrl: Assets.pumpkinSoup,
               ),
             ),
           ),

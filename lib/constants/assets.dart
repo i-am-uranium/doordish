@@ -36,6 +36,10 @@ class Assets {
   static const pumpkinSoup = 'assets/images/pumpkin_soup.png';
   static const slideVeg = 'assets/images/slide_veg.png';
 
+  static const blogOne = 'assets/images/blogs/blog_1.png';
+  static const blogTwo = 'assets/images/blogs/blog_2.png';
+  static const blogThree = 'assets/images/blogs/blog_3.png';
+
   static const bowl = 'assets/icons/bowl.png';
   static const bread_1 = 'assets/icons/bread_1.png';
   static const burger = 'assets/icons/burger.png';

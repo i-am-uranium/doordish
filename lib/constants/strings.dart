@@ -31,4 +31,5 @@ class Strings {
       '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placerat cursus id id porttitor hendrerit quisque justo. Vitae cursus vitae, posuere tempus proin arcu volutpat. Tristique dictum ipsum lorem metus, morbi tincidunt. Convallis ultrices eugiat tortor turpis ipsum ultrices eget. Duis ut velit adipiscing sed. A sed enim sit diam et, imperdiet ultrices non.''';
   static const String overviewDescription2 =
       '''Convallis ultrices eugiat tortor turpis ipsum ultrices eget. Duis ut velit adipiscing sed. A sed enim sit diam et, imperdiet ultrices non.''';
+  static const String orderNow = 'Order Now';
 }

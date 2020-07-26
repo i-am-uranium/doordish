@@ -17,6 +17,7 @@ dependencies:
   js: ^0.6.0
   http: ^0.12.0+4
   flutter_google_maps: ^3.7.1
+  timeago: ^2.0.26
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +52,10 @@ flutter:
     - assets/icons/logo.png
     - assets/icons/female_avatar.png
     - assets/icons/award.png
+
+    - assets/images/blogs/blog_1.png
+    - assets/images/blogs/blog_2.png
+    - assets/images/blogs/blog_3.png
 
     - assets/images/meals/bean_soup.png
     - assets/images/meals/cabbage_salad.png
