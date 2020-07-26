@@ -1,0 +1,11 @@
+{
+	"AWSEBDockeerrunVersion": "1",
+	"Images": {
+		"Nane": "ravi59/doordish"
+	},
+	"Ports": [
+		{
+			"ContainerPort": "80"
+		}
+	]
+}

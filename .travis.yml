@@ -1,11 +1,17 @@
-language: generic
+services:
+  - docker
+
+after_success:
+  - docker build -t ravi59/doordish .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push ravi59/doordish
 deploy:
   provider: elasticbeanstalk
-  region: "ap-south-1"
-  app: "doordish"
-  env: "Doordish-env"
-  bucket_name: "elasticbeanstalk-ap-south-1-566658347233"
-  bucket_path: "doordish"
+  region: ap-south-1
+  app: doordish
+  env: Doordish-env
+  bucket-name: elasticbeanstalk-ap-south-1-566658347233
+  bucket-path: doordish
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
