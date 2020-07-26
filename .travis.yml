@@ -5,7 +5,6 @@ script:
   - docker build -t ravi59/doordish .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push ravi59/doordish
-
 deploy:
   provider: elasticbeanstalk
   region: ap-south-1
