@@ -1,23 +1,16 @@
 name: doordish
-description: Food delivery app
+description: Open-source trust-first ordering assistant
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_icons: ^1.1.0
-  logger: ^0.8.3
-  equatable: ^1.0.0
-  js: ^0.6.0
-  http: ^0.12.0+4
-  flutter_google_maps: ^3.7.1
-  timeago: ^2.0.26
 
 dev_dependencies:
   flutter_test:
